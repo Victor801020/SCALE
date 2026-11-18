@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gun Scale Battle — Desafio CSS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="game-container">
+    <aside class="vscode-sidebar">
+      <div class="activity-bar"><div class="icon active">📄</div><div class="icon">🔍</div><div class="icon">🌿</div><div class="icon">⚙️</div></div>
+      <section class="vscode-editor">
+        <div class="editor-tabs"><div class="tab active"><span class="file-icon">#</span> controls.css</div></div>
+        <div class="code-area">
+          <div class="code-content">
+            <div class="code-line comment">/* DESAFIO: configure a arma para cada zumbi */</div>
+            <div class="code-line selector">.arma {</div>
+            <div class="code-line code-action"><span class="indent"></span><button class="vscode-btn" id="btn-left" onclick="aplicarDirecao(-1)">/* transform: scale(1) scaleX(-1); */ <span class="comment">/* ESQUERDA */</span></button></div>
+            <div class="code-line code-action"><span class="indent"></span><button class="vscode-btn" id="btn-right" onclick="aplicarDirecao(1)">/* transform: scale(1) scaleX(1); */ <span class="comment">/* DIREITA */</span></button></div>
+            <div class="code-line code-action"><span class="indent"></span><button class="vscode-btn" id="btn-mini" onclick="aplicarTamanho(0.7)">/* transform: scale(0.7); */ <span class="comment">/* ARMA PRECISA */</span></button></div>
+            <div class="code-line code-action"><span class="indent"></span><button class="vscode-btn" id="btn-normal" onclick="aplicarTamanho(1)">/* transform: scale(1); */ <span class="comment">/* ARMA NORMAL */</span></button></div>
+            <div class="code-line code-action"><span class="indent"></span><button class="vscode-btn" id="btn-big" onclick="aplicarTamanho(2.2)">/* transform: scale(2.2); */ <span class="comment">/* SUPER ARMA */</span></button></div>
+            <div class="code-line selector">}</div>
+            <div class="code-line comment spacer-line">/* ÁREA DO ESCUDO */</div>
+            <div class="code-line selector">.escudo-base {</div>
+            <div class="code-line code-action"><span class="indent"></span><button class="vscode-btn" id="btn-hidden" onclick="aplicarOverflow('hidden')">/* overflow: hidden; */ <span class="comment">/* MANTER DENTRO */</span></button></div>
+            <div class="code-line code-action"><span class="indent"></span><button class="vscode-btn" id="btn-visible" onclick="aplicarOverflow('visible')">/* overflow: visible; */ <span class="comment">/* SAIR DO ESCUDO */</span></button></div>
+            <div class="code-line selector">}</div>
+            <div class="code-line comment spacer-line">/* AÇÃO */</div>
+            <div class="code-line code-action"><button class="vscode-btn fire-code" onclick="disparar()">dispararTiro(); <span class="comment">/* [ENTER] */</span></button></div>
+            <div class="code-status" id="code-status">Aguardando o primeiro desafio...</div>
+          </div>
+        </div>
+        <div class="editor-footer">
+          <button class="btn-start-game" id="btn-start" onclick="iniciarJogo()">▶ Iniciar desafio</button>
+          <button class="btn-continue" id="btn-continue" onclick="continuarRodada()" disabled>Continuar →</button>
+        </div>
+      </section>
+    </aside>
+
+    <main class="stage">
+      <div class="hud">
+        <div class="hud-item">DESAFIO: <strong id="hud-round">0/5</strong></div>
+        <div class="hud-item">ZUMBIS: <strong id="hud-kills">5</strong></div>
+        <div class="hud-item">VIDA: <strong id="hud-hp">100 HP</strong></div>
+      </div>
+      <div class="instruction-panel" id="instruction-panel">
+        <div class="instruction-kicker">MISSÃO CSS</div>
+        <h2 id="instruction-title">Prepare-se para a invasão!</h2>
+        <p id="instruction-text">Inicie o jogo. Quando o zumbi aparecer, a arena vai pausar e você deverá configurar a arma clicando nas linhas de código.</p>
+        <div class="instruction-tip" id="instruction-tip">As linhas comentadas começam com /* ... */. Ao clicar, elas serão ativadas.</div>
+      </div>
+      <div class="game-world" id="game-world">
+        <div class="cloud cloud-one">☁️</div><div class="cloud cloud-two">☁️</div>
+        <div class="ground"></div>
+        <div class="shield-container overflow-hidden" id="shield-box"><div class="shield-visual"></div><div class="character hero" id="hero">🔫</div></div>
+        <div class="character zombie hidden" id="zombie">🧟</div>
+        <div class="impact hidden" id="impact">💥</div>
+        <div class="pause-overlay" id="pause-overlay"><span>⏸ DESAFIO PAUSADO</span><small>Configure o CSS para continuar</small></div>
+      </div>
+      <div class="bottom-bar">
+        <div class="terminal"><div class="terminal-title">TERMINAL EDUCATIVO</div><div id="terminal-log"><span class="prompt">ps1&gt;</span> Clique em Iniciar desafio.</div></div>
+        <button class="shoot-button" id="shoot-button" onclick="disparar()" disabled>⚡ DISPARAR</button>
+      </div>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
